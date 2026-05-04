@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andriy Rybak — Bespoke Decorative Concrete & Garden Features</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --stone: #2c2420;
+    --warm-cream: #f4ede2;
+    --aged-cream: #e8ddd0;
+    --earth: #7a5c42;
+    --rust: #a0522d;
+    --moss: #5c6b3a;
+    --pale-moss: #8a9e6a;
+    --gold: #c8973a;
+    --light-stone: #d4c9bc;
+    --charcoal: #1a1614;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-cream);
+    color: var(--stone);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── Noise texture overlay ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: transparent;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(44,36,32,0.92);
+    backdrop-filter: blur(10px);
+  }
+  nav.scrolled .nav-logo, nav.scrolled .nav-links a { color: var(--warm-cream); }
+  nav.scrolled .nav-links a::after { background: var(--gold); }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--warm-cream);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    color: var(--warm-cream);
+    text-decoration: none;
+    font-weight: 300;
+    position: relative;
+    transition: color 0.3s;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1px; background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); }
+
+  /* ─── HERO ─── */
+  .hero {
+    height: 100vh; min-height: 700px;
+    position: relative;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: 
+      linear-gradient(160deg, rgba(26,22,20,0.55) 0%, rgba(26,22,20,0.2) 50%, rgba(122,92,66,0.4) 100%),
+      url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&auto=format&fit=crop') center/cover no-repeat;
+    transform: scale(1.05);
+    animation: heroZoom 18s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to   { transform: scale(1.0); }
+  }
+
+  /* Stone texture overlay on hero */
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='t'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' type='turbulence'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23t)' opacity='0.06'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay; pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 4rem 8rem;
+    max-width: 800px;
+    animation: fadeUp 1.2s 0.3s both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3.5rem, 7vw, 7rem);
+    line-height: 0.95;
+    font-weight: 900;
+    color: var(--warm-cream);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: rgba(244,237,226,0.82);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    color: var(--warm-cream);
+    text-decoration: none;
+    border: 1px solid rgba(200,151,58,0.6);
+    padding: 1rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+  .hero-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: translateX(-105%);
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
+  .hero-cta:hover::before { transform: translateX(0); }
+  .hero-cta:hover { color: var(--stone); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; right: 3rem; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeIn 1s 2s forwards;
+  }
+  .hero-scroll span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem; letter-spacing: 0.25em;
+    color: rgba(244,237,226,0.5);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollLine 2s 2s infinite;
+  }
+  @keyframes scrollLine {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { position: relative; }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 90vh;
+  }
+
+  .about-image {
+    position: relative; overflow: hidden;
+  }
+  .about-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: sepia(15%) contrast(1.05);
+    transition: transform 8s ease;
+  }
+  .about:hover .about-image img { transform: scale(1.03); }
+
+  .about-image::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(44,36,32,0.3));
+  }
+
+  .about-content {
+    background: var(--stone);
+    color: var(--warm-cream);
+    padding: 7rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative;
+  }
+
+  .about-content::before {
+    content: '"';
+    position: absolute;
+    top: 3rem; left: 4rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 15rem;
+    line-height: 1;
+    color: rgba(200,151,58,0.08);
+    pointer-events: none;
+  }
+
+  .about-content .section-title {
+    color: var(--warm-cream);
+    margin-bottom: 2rem;
+  }
+  .about-content .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .about-body {
+    font-size: 1.15rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: rgba(244,237,226,0.8);
+    margin-bottom: 2.5rem;
+  }
+
+  .about-detail {
+    display: flex; gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(244,237,226,0.12);
+  }
+  .detail-item { }
+  .detail-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .detail-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: rgba(244,237,226,0.55);
+    margin-top: 0.3rem;
+  }
+
+  /* ─── SERVICES ─── */
+  .services {
+    padding: 9rem 4rem;
+    background: var(--aged-cream);
+  }
+
+  .services-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 5rem;
+    gap: 3rem;
+  }
+  .services-intro {
+    max-width: 380px;
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--earth);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .service-card {
+    padding: 3rem 2.5rem;
+    border: 1px solid var(--light-stone);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+  .service-card:hover {
+    background: var(--stone);
+  }
+  .service-card:hover .service-title,
+  .service-card:hover .service-desc { color: var(--warm-cream); }
+  .service-card:hover .service-num { color: rgba(200,151,58,0.25); }
+  .service-card:hover .service-icon { border-color: rgba(244,237,226,0.2); color: var(--gold); }
+
+  .service-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: rgba(122,92,66,0.1);
+    line-height: 1;
+    position: absolute; top: 1.5rem; right: 2rem;
+    transition: color 0.4s;
+  }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    border: 1.5px solid var(--light-stone);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+    transition: border-color 0.4s, color 0.4s;
+    color: var(--rust);
+  }
+
+  .service-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    transition: color 0.4s;
+  }
+
+  .service-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--earth);
+    transition: color 0.4s;
+  }
+
+  /* ─── PORTFOLIO ─── */
+  .portfolio {
+    padding: 9rem 4rem;
+    background: var(--warm-cream);
+  }
+
+  .portfolio-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  .portfolio-header .section-title { margin-bottom: 1rem; }
+  .portfolio-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--earth);
+    font-style: italic;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+  }
+
+  .port-item {
+    position: relative; overflow: hidden;
+    background: var(--light-stone);
+  }
+  .port-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease, filter 0.5s;
+    filter: sepia(10%) contrast(1.05);
+  }
+  .port-item:hover img { transform: scale(1.06); filter: sepia(0%) contrast(1.08); }
+
+  .port-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(44,36,32,0.85) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.4s;
+    display: flex; align-items: flex-end;
+    padding: 2rem;
+  }
+  .port-item:hover .port-overlay { opacity: 1; }
+  .port-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--warm-cream);
+    letter-spacing: 0.05em;
+  }
+
+  .port-item:nth-child(1) { grid-column: 1 / 8; grid-row: 1; min-height: 420px; }
+  .port-item:nth-child(2) { grid-column: 8 / 13; grid-row: 1; min-height: 420px; }
+  .port-item:nth-child(3) { grid-column: 1 / 5; grid-row: 2; min-height: 350px; }
+  .port-item:nth-child(4) { grid-column: 5 / 9; grid-row: 2; min-height: 350px; }
+  .port-item:nth-child(5) { grid-column: 9 / 13; grid-row: 2; min-height: 350px; }
+
+  /* ─── PROCESS ─── */
+  .process {
+    background: var(--stone);
+    color: var(--warm-cream);
+    padding: 9rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .process::before {
+    content: 'CRAFT';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 22vw;
+    font-weight: 900;
+    color: rgba(255,255,255,0.025);
+    right: -2rem; top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .process-header { max-width: 550px; margin-bottom: 5rem; }
+  .process-header .section-title { color: var(--warm-cream); }
+  .process-header .section-title em { color: var(--gold); font-style: italic; }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .process-step {
+    padding: 3rem 2.5rem;
+    border: 1px solid rgba(244,237,226,0.07);
+    position: relative;
+    transition: background 0.4s;
+  }
+  .process-step:hover { background: rgba(244,237,226,0.04); }
+
+  .step-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--warm-cream);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .step-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(244,237,226,0.55);
+    line-height: 1.8;
+  }
+
+  .step-line {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  .process-step:hover .step-line { transform: scaleX(1); }
+
+  /* ─── TESTIMONIAL / QUOTE ─── */
+  .quote-section {
+    background: var(--rust);
+    padding: 7rem 4rem;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .quote-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    line-height: 0.5;
+    color: rgba(244,237,226,0.2);
+    display: block;
+    margin-bottom: 2rem;
+  }
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    font-style: italic;
+    color: var(--warm-cream);
+    max-width: 850px;
+    margin: 0 auto 2rem;
+    line-height: 1.5;
+    position: relative; z-index: 1;
+  }
+  .quote-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: rgba(244,237,226,0.65);
+    position: relative; z-index: 1;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact {
+    padding: 9rem 4rem;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 6rem;
+    align-items: center;
+    background: var(--warm-cream);
+  }
+
+  .contact-info .section-title { margin-bottom: 2rem; }
+  .contact-info .section-title em { font-style: italic; color: var(--rust); }
+
+  .contact-body {
+    font-size: 1.1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--earth);
+    margin-bottom: 3rem;
+  }
+
+  .contact-items { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .contact-item {
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .contact-icon {
+    width: 50px; height: 50px;
+    flex-shrink: 0;
+    background: var(--stone);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    color: var(--gold);
+  }
+  .contact-text-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: rgba(44,36,32,0.4);
+    margin-bottom: 0.2rem;
+  }
+  .contact-text-value {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--stone);
+  }
+  .contact-text-value a {
+    color: inherit; text-decoration: none;
+    border-bottom: 1px solid var(--rust);
+    transition: color 0.3s;
+  }
+  .contact-text-value a:hover { color: var(--rust); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+  .form-group label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: rgba(44,36,32,0.5);
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--light-stone);
+    padding: 0.75rem 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--stone);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-bottom-color: var(--rust);
+  }
+  .form-group textarea { min-height: 100px; }
+
+  .form-submit {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    background: var(--stone);
+    color: var(--warm-cream);
+    border: none;
+    padding: 1.1rem 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: color 0.4s;
+  }
+  .form-submit::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--rust);
+    transform: translateX(-105%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+  }
+  .form-submit:hover::before { transform: translateX(0); }
+  .form-submit span { position: relative; z-index: 1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal);
+    color: rgba(244,237,226,0.5);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--warm-cream);
+  }
+  .footer-tagline {
+    font-size: 0.85rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+  .footer-copy {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── REVEAL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+  /* ─── DIVIDER ─── */
+  .ornament {
+    display: flex; align-items: center; gap: 1.5rem;
+    color: var(--gold);
+    font-size: 1.2rem;
+  }
+  .ornament::before, .ornament::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  /* ─── AREA TAG ─── */
+  .area-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(160,82,45,0.1);
+    border: 1px solid rgba(160,82,45,0.25);
+    padding: 0.4rem 1.1rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--rust);
+    margin-bottom: 2rem;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 1.5rem 6rem; }
+    .hero-title { font-size: clamp(2.8rem, 10vw, 5rem); }
+    .about { grid-template-columns: 1fr; }
+    .about-image { min-height: 50vw; }
+    .about-content { padding: 4rem 2rem; }
+    .services { padding: 5rem 1.5rem; }
+    .services-header { flex-direction: column; align-items: flex-start; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio { padding: 5rem 1.5rem; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .port-item { grid-column: auto !important; grid-row: auto !important; min-height: 240px !important; }
+    .process { padding: 5rem 1.5rem; }
+    .process-steps { grid-template-columns: 1fr 1fr; }
+    .contact { grid-template-columns: 1fr; padding: 5rem 1.5rem; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">ANDRIY RYBAK</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Bespoke Decorative Concrete — London</p>
+    <h1 class="hero-title">Sculpted<br>from <em>Stone</em><br>& Vision</h1>
+    <p class="hero-sub">Handcrafted decorative concrete art for private homes across London and the surrounding areas. Every feature uniquely designed, carved by hand.</p>
+    <a href="#contact" class="hero-cta">Discuss Your Project →</a>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image">
+    <img src="https://images.unsplash.com/photo-1604505416816-cd4e12afc13d?w=900&auto=format&fit=crop" alt="Decorative concrete craftsmanship" loading="lazy">
+  </div>
+  <div class="about-content">
+    <p class="section-label">The Craftsman</p>
+    <h2 class="section-title reveal">Art in <em>Concrete</em>,<br>Made to Last</h2>
+    <p class="about-body reveal" style="transition-delay:0.15s">
+      I specialise in decorative art concrete and landscape features for private residential properties — creating facades, garden features, columns, BBQ areas, water features, and bespoke exterior structures that are genuinely one of a kind.
+      <br><br>
+      Every texture, every surface, every grain is carved by hand without moulds or stamps. The result is architecture that carries character you can feel.
+    </p>
+    <div class="about-detail reveal" style="transition-delay:0.3s">
+      <div class="detail-item">
+        <div class="detail-num">100%</div>
+        <div class="detail-label">Hand-Carved</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-num">0</div>
+        <div class="detail-label">Moulds or Stamps</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-num">∞</div>
+        <div class="detail-label">Unique Designs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header">
+    <div>
+      <p class="section-label">What I Create</p>
+      <h2 class="section-title reveal">Services &<br>Specialisms</h2>
+    </div>
+    <p class="services-intro reveal" style="transition-delay:0.2s">Each project begins with a conversation about your space, your ideas, and your budget. Nothing is off the shelf — everything is made for you.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-num">01</div>
+      <div class="service-icon">🏛</div>
+      <h3 class="service-title">Decorative Facades</h3>
+      <p class="service-desc">Transform exterior walls with hand-carved concrete finishes that replicate the texture and warmth of natural brick, stone, or aged timber — built to endure all weather.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-num">02</div>
+      <div class="service-icon">🌿</div>
+      <h3 class="service-title">Garden Features</h3>
+      <p class="service-desc">Wells, water features, planters, ornamental columns, and sculptural centrepieces designed to complement your garden's character and your home's architecture.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-num">03</div>
+      <div class="service-icon">🔥</div>
+      <h3 class="service-title">BBQ & Outdoor Kitchens</h3>
+      <p class="service-desc">Custom-built outdoor cooking and entertaining structures — combining function with artisan craftsmanship, finished in natural stone and wood-imitation concrete.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.3s">
+      <div class="service-num">04</div>
+      <div class="service-icon">🪵</div>
+      <h3 class="service-title">Wood & Stone Imitation</h3>
+      <p class="service-desc">Concrete surfaces sculpted and painted to convincingly mimic natural timber grain, aged stone, and brick — indistinguishable from the real thing, but far more durable.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.4s">
+      <div class="service-num">05</div>
+      <div class="service-icon">🏗</div>
+      <h3 class="service-title">Gates, Columns & Arches</h3>
+      <p class="service-desc">Entrance columns, gateway arches, pergola supports, and structural decorative elements that make an immediate impression from the moment guests arrive.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.5s">
+      <div class="service-num">06</div>
+      <div class="service-icon">✦</div>
+      <h3 class="service-title">Bespoke Commissions</h3>
+      <p class="service-desc">Have a unique idea or vision? I work closely with homeowners, designers, and contractors to realise concepts that don't fit a standard brief. If you can imagine it, it can be built.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="portfolio-header">
+    <p class="section-label">Selected Work</p>
+    <h2 class="section-title reveal">The Portfolio</h2>
+    <p class="portfolio-sub reveal" style="transition-delay:0.15s">Every project is entirely unique — shaped by the space, the owner, and the story the garden wants to tell.</p>
+  </div>
+  <div class="portfolio-grid">
+    <div class="port-item reveal">
+      <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=900&auto=format&fit=crop" alt="Garden feature" loading="lazy">
+      <div class="port-overlay"><div class="port-label">Stone Garden Well — Surrey</div></div>
+    </div>
+    <div class="port-item reveal" style="transition-delay:0.1s">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=700&auto=format&fit=crop" alt="Decorative arch" loading="lazy">
+      <div class="port-overlay"><div class="port-label">Decorative Entrance Arch — London</div></div>
+    </div>
+    <div class="port-item reveal" style="transition-delay:0.15s">
+      <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&auto=format&fit=crop" alt="Outdoor structure" loading="lazy">
+      <div class="port-overlay"><div class="port-label">Rustic Columns — Kent</div></div>
+    </div>
+    <div class="port-item reveal" style="transition-delay:0.2s">
+      <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=600&auto=format&fit=crop" alt="Fireplace feature" loading="lazy">
+      <div class="port-overlay"><div class="port-label">Outdoor BBQ Feature — Essex</div></div>
+    </div>
+    <div class="port-item reveal" style="transition-delay:0.25s">
+      <img src="https://images.unsplash.com/photo-1598928636135-d146006ff4be?w=600&auto=format&fit=crop" alt="Garden wall" loading="lazy">
+      <div class="port-overlay"><div class="port-label">Textured Garden Wall — London</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <span class="quote-mark">"</span>
+  <p class="quote-text">This is not mass production — every project is individually designed and crafted to suit the property and the client's vision.</p>
+  <p class="quote-author">— Andriy Rybak, Craftsman</p>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="process-header">
+    <p class="section-label">How It Works</p>
+    <h2 class="section-title reveal">From <em>Idea</em><br>to Installation</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal">
+      <div class="step-num">Step 01</div>
+      <h3 class="step-title">Initial Conversation</h3>
+      <p class="step-desc">We discuss your ideas, the space, your design vision, and your budget. No obligation — just a relaxed, open conversation about what's possible.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.15s">
+      <div class="step-num">Step 02</div>
+      <h3 class="step-title">Design & Planning</h3>
+      <p class="step-desc">I develop a tailored concept for your project, carefully selecting textures, finishes, and forms that complement your property and surroundings.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.3s">
+      <div class="step-num">Step 03</div>
+      <h3 class="step-title">Handcrafted Build</h3>
+      <p class="step-desc">Every surface is hand-carved on site without moulds or stamps. The work is precise, unhurried, and built to endure the British climate for decades.</p>
+      <div class="step-line"></div>
+    </div>
+    <div class="process-step reveal" style="transition-delay:0.45s">
+      <div class="step-num">Step 04</div>
+      <h3 class="step-title">Final Finish</h3>
+      <p class="step-desc">Durable, weather-resistant finishes are applied and the site is left clean and complete. A feature that will define your outdoor space for years to come.</p>
+      <div class="step-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <div class="area-tag">📍 London & Surrounding Areas</div>
+    <p class="section-label">Get in Touch</p>
+    <h2 class="section-title reveal">Let's Discuss<br>Your <em>Project</em></h2>
+    <p class="contact-body reveal" style="transition-delay:0.15s">
+      Whether you have a clear vision or just a rough idea, I'm happy to talk through ideas, share examples, and put together a quote tailored to your project and budget.
+    </p>
+    <div class="contact-items reveal" style="transition-delay:0.3s">
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-text-label">WhatsApp / Phone</div>
+          <div class="contact-text-value"><a href="https://wa.me/447469043965">+44 7469 043965</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-text-label">Based In</div>
+          <div class="contact-text-value">London & surrounding areas</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-text-label">Open For</div>
+          <div class="contact-text-value">Bespoke projects & collaborations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="reveal" style="transition-delay:0.2s">
+    <form class="contact-form" onsubmit="return false">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="James">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Harrison">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="james@example.com">
+      </div>
+      <div class="form-group">
+        <label>Project Type</label>
+        <select>
+          <option>Decorative Facade</option>
+          <option>Garden Feature</option>
+          <option>BBQ / Outdoor Kitchen</option>
+          <option>Columns / Arches / Gates</option>
+          <option>Wood / Stone Imitation</option>
+          <option>Something Else</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell Me About Your Project</label>
+        <textarea placeholder="Describe your ideas, space, or vision — as much or as little as you'd like..."></textarea>
+      </div>
+      <button type="submit" class="form-submit"><span>Send Enquiry</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">ANDRIY RYBAK</div>
+    <div class="footer-tagline">Bespoke Decorative Concrete & Garden Features</div>
+  </div>
+  <div class="footer-copy">© 2025 · London & Surrounding Areas · All Work Handcrafted</div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal, .reveal-left');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
